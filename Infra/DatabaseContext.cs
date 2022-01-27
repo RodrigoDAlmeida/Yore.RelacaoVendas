@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
@@ -11,7 +12,7 @@ namespace Infra
 {
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext() : base("Yore.RelacaoVendas")
+        public DatabaseContext() : base("RelacaoVendas.sdf")
         {
             Database.SetInitializer<DatabaseContext>(new DatabaseInitializer());
             Configuration.LazyLoadingEnabled = true;
@@ -35,5 +36,7 @@ namespace Infra
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<Fornecedor> fornecedores { get; set; }
     }
 }
